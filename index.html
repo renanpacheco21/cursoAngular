@@ -13,7 +13,7 @@
             Bem vindo ao curso de Angular JS
         </h1>
     </div>
-    <div ng-controller="PrimeiroController">
+    <div ng-controller="ListagemAlunosController">
         <p>Olá, {{nome}} seja bem vindo</p>
         <div ng-class="{'panel panel-primary':iniciado, 'panel panel-danger':!iniciado}">
             <div class="panel-heading">
@@ -65,6 +65,10 @@
         <button ng-hide="iniciado" ng-click="iniciar()" class="btn btn-success">
             Iniciar
         </button>
+
+    </div>
+    <br>
+    <div class="well" ng-controller="NovaInscricaoController">
         <h3>Nova Inscrição no Curso</h3>
         <form name="form_1">
             <div class="row">
@@ -72,27 +76,35 @@
                     <div class="form-group form-group-default">
                         <label>Nome</label>
                         <input class="form-control" type="text" id="nome_aluno" name="nome_aluno" ng-model="nome_aluno"
-                            ng-readonly="!iniciado" ng-minlength="3">
+                            ng-minlength="3">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group form-group-default">
                         <label>Idade</label>
                         <input class="form-control" type="number" id="idade_aluno" name="idade_aluno"
-                            ng-model="idade_aluno" ng-readonly="!iniciado" ng-maxlength="3">
+                            ng-model="idade_aluno" ng-maxlength="3">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <button ng-click="submeter()" class="btn btn-primary" ng-disabled="!iniciado">
+                    <button ng-click="submeter()" class="btn btn-primary">
                         Adicionar
                     </button>
                 </div>
             </div>
         </form>
     </div>
-    <br>
+    <div class="well" ng-controller="PrevisaoTempoController">
+        <h3>Exemplo ngResource</h3>
+        <h3>Previsão do Tempo</h3>
+        <h4>Criciúma/SC, Brasil</h4>
+        <h4>Local: {{tempo.name}}</h4>
+        <h4>Temperatura: {{tempo.main.temp}}</h4>
+        <h4>Máxima: {{tempo.main.temp_max}}</h4>
+        <h4>Mínima: {{tempo.main.temp_min}}</h4>
+    </div>
     <div class="container-fluid container-fixed-lg footer">
         <div class="copyright sm-text-center">
             <p class="small no-margin pull-left sm-pull-reset">
@@ -101,8 +113,12 @@
         </div>
     </div>
     <script src="scripts/libs/angular.js"></script>
+    <script src="scripts/libs/ngResource.js"></script>"
     <script src="scripts/app.js"></script>
-    <script src="scripts/primeiro-controller.js"></script>
+    <script src="scripts/listagem-alunos-controller.js"></script>
+    <script src="scripts/nova-inscricao-controller.js"></script>
+    <script src="scripts/previsao-tempo-controller.js"></script>
+    <script src="scripts/alunos-collection-service.js"></script>
 </body>
 
 </html>
