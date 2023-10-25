@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link href="scripts/libs/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="contanier" ng-app="aplicacao">
+    <div class="header-inner">
+        <h1 style="text-align: center; color: blue;">
+            Bem vindo ao curso de Angular JS
+        </h1>
+    </div>
+    <div ng-controller="ListagemAlunosController">
+        <p>Olá, {{nome}} seja bem vindo</p>
+        <div ng-class="{'panel panel-primary':iniciado, 'panel panel-danger':!iniciado}">
+            <div class="panel-heading">
+                <h3 class="panel-title">Situação do Curso</h3>
+            </div>
+            <div class="panel-body">
+                <p ng-show="iniciado">Curso em Andamento</p>
+                <p ng-hide="iniciado">Curso Finalizado</p>
+                <p ng-if="!iniciado">Aguarde o Próximo Curso</p>
+                <p>Preço do Curso: {{valor | currency : 'R$ '}}</p>
+                <p>Última Atualização: {{hoje | date: 'dd/MM/yyyy'}}</p>
+            </div>
+        </div>
+        <div>
+            <label>Definir Preço:</label>
+            <input type="number" id="valor" name="valor" ng-model="valor">
+        </div>
+        <h3>Alunos Cadastrados</h3>
+        <div>
+            <label>Filtrar por nome:</label>
+            <input type="text" ng-model="filtro">
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th ng-click="ordenarPorNome()">
+                        Nome
+                    </th>
+                    <th ng-click="ordenarPorIdade()">
+                        Idade
+                    </th>
+                </tr>
+                <tr ng-repeat="aluno in alunos | filter : filtro">
+                    <td>
+                        {{aluno.nome}}
+                    </td>
+                    <td>
+                        {{aluno.idade}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+        <br>
+        <button ng-show="iniciado" ng-click="finalizar()" class="btn btn-danger">
+            Finalizar
+        </button>
+        <button ng-hide="iniciado" ng-click="iniciar()" class="btn btn-success">
+            Iniciar
+        </button>
+    </div>
+    <br>
+    <div class="well" ng-controller="NovaInscricaoController">
+        <h3>Nova Inscrição no Curso</h3>
+        <form name="form_1">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-group-default">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" id="nome_aluno" name="nome_aluno" ng-model="nome_aluno"
+                            ng-minlength="3">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group form-group-default">
+                        <label>Idade</label>
+                        <input class="form-control" type="number" id="idade_aluno" name="idade_aluno"
+                            ng-model="idade_aluno" ng-maxlength="3">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <button ng-click="submeter()" class="btn btn-primary">
+                        Adicionar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div ui-view></div>
+    <div class="container-fluid container-fixed-lg footer">
+        <div class="copyright sm-text-center">
+            <p class="small no-margin pull-left sm-pull-reset">
+                <span class="hint-text">Copyright @ 2023</span>
+            </p>
+        </div>
+    </div>
+    <script src="scripts/libs/angular.js"></script>
+    <script src="scripts/libs/ngResource.js"></script>"
+    <script src="scripts/app.js"></script>
+    <script src="scripts/libs/angular-ui-router.js"></script>
+    <script src="scripts/listagem-alunos-controller.js"></script>
+    <script src="scripts/nova-inscricao-controller.js"></script>
+    <script src="scripts/previsao-tempo-controller.js"></script>
+    <script src="scripts/alunos-collection-service.js"></script>
+</body>
+
+</html>
